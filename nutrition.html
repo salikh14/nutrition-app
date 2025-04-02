@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #262626; -webkit-text-stroke: #262626}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #103cc0; -webkit-text-stroke: #103cc0}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Arial; color: #1a1a1a; -webkit-text-stroke: #1a1a1a; background-color: #ffffff; min-height: 11.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Helvetica Neue'; font-kerning: none; color: #262626; background-color: #ffffff; -webkit-text-stroke: 0px #262626}
+    span.s3 {font: 12.0px Times; font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s4 {font-kerning: none; background-color: #ffffff}
+    span.s5 {font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s6 {text-decoration: underline ; font-kerning: none; -webkit-text-stroke: 0px #103cc0}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;title&gt;Nutrition Info&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;style&gt;</span></p>
+<p class="p1"><span class="s1">        body {</span></p>
+<p class="p1"><span class="s1">            font-family: Arial, sans-serif;</span></p>
+<p class="p1"><span class="s1">            margin: 20px;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">        #results {</span></p>
+<p class="p1"><span class="s1">            margin-top: 20px;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">    &lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h1&gt;Nutrition Information&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div id="results"&gt;Waiting for input...&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">    &lt;script&gt;</span></p>
+<p class="p1"><span class="s1">        async function fetchNutrition(food) {</span></p>
+<p class="p1"><span class="s1">            const appId = "</span><span class="s2">99f5cdd7</span><span class="s1">";<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s3">            const appKey =<span class="Apple-converted-space"> </span> "</span><span class="s4">68681a8757b7f873ff5ee1f82e2d4409 —</span><span class="s3">";<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5">            const url = "<a href="https://trackapi.nutritionix.com/v2/natural/nutrients"><span class="s6">https://trackapi.nutritionix.com/v2/natural/nutrients</span></a>";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">            try {</span></p>
+<p class="p1"><span class="s1">                const response = await fetch(url, {</span></p>
+<p class="p1"><span class="s1">                    method: "POST",</span></p>
+<p class="p1"><span class="s1">                    headers: {</span></p>
+<p class="p1"><span class="s1">                        "x-app-id": appId,</span></p>
+<p class="p1"><span class="s1">                        "x-app-key": appKey,</span></p>
+<p class="p1"><span class="s1">                        "Content-Type": "application/json"</span></p>
+<p class="p1"><span class="s1">                    },</span></p>
+<p class="p1"><span class="s1">                    body: JSON.stringify({ query: food })</span></p>
+<p class="p1"><span class="s1">                });</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">                const data = await response.json();</span></p>
+<p class="p1"><span class="s1">                document.getElementById("results").innerHTML = `</span></p>
+<p class="p1"><span class="s1">                    &lt;p&gt;Food: ${food}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;p&gt;Calories: ${data.foods[0].nf_calories}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;p&gt;Carbs: ${data.foods[0].nf_total_carbohydrate}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;p&gt;Fats: ${data.foods[0].nf_total_fat}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">                `;</span></p>
+<p class="p1"><span class="s1">            } catch (error) {</span></p>
+<p class="p1"><span class="s1">                document.getElementById("results").innerHTML = `&lt;p&gt;Error fetching data.&lt;/p&gt;`;</span></p>
+<p class="p1"><span class="s1">                console.error(error);</span></p>
+<p class="p1"><span class="s1">            }</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">        // Listen for input from MIT App Inventor WebViewer</span></p>
+<p class="p1"><span class="s1">        setInterval(() =&gt; {</span></p>
+<p class="p1"><span class="s1">            const food = window.AppInventor.getWebViewString();</span></p>
+<p class="p1"><span class="s1">            if (food) {</span></p>
+<p class="p1"><span class="s1">                fetchNutrition(food);</span></p>
+<p class="p1"><span class="s1">            }</span></p>
+<p class="p1"><span class="s1">        }, 1000);</span></p>
+<p class="p1"><span class="s1">    &lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+</body>
+</html>
